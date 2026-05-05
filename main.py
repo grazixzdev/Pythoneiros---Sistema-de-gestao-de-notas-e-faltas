@@ -4,7 +4,6 @@ Matricula = int(input("Digite sua matricula:"))
 Mat1 = float(input("Digite sua nota 1 de Matematica:"))
 Mat2 = float(input("Digite sua nota 2 de Matematica:"))
 MatT = (Mat1 + Mat2)/2
-MatP = int(input("Digite a frequencia do aluno: "))
 
 Port1 = float(input("Digite sua nota 1 de Portugues:"))
 Port2 = float(input("Digite sua nota 2 de Portugues:"))
