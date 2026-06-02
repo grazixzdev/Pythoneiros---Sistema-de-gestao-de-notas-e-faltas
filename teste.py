@@ -3,7 +3,36 @@
 # CONTEÚDO: Estruturas de Decisão (if, elif, else)
 # =================================================================
 
-def situacao_materia (presenca_percentual):
+def cadastro_notas (relatorio_detalhado, disciplinas, total_aulas, nota_minima):
+    for materia in disciplinas:
+        print(f"\nDISCIPLINA: {materia}")
+        
+        # Lançamento do 1º Bimestre (Prova 6.0 + Atividades 4.0)
+        p1 = float(input(f"  Nota da Prova - 1º Bim (0-6): "))
+        a1 = float(input(f"  Nota de Atividades - 1º Bim (0-4): "))
+        nota_bim1 = p1 + a1
+        
+        # Lançamento do 2º Bimestre (Prova 6.0 + Atividades 4.0)
+        p2 = float(input(f"  Nota da Prova - 2º Bim (0-6): "))
+        a2 = float(input(f"  Nota de Atividades - 2º Bim (0-4): "))
+        nota_bim2 = p2 + a2
+        
+        # Cálculo da Média Final e Frequência
+        media_final = (nota_bim1 + nota_bim2) / 2
+        faltas = int(input(f"  Total de faltas em {materia}: "))
+        presenca_percentual = ((total_aulas - faltas) / total_aulas) * 100
+
+        situacao = situacao_materia(presenca_percentual, media_final, nota_minima)
+        
+        # Armazenando os dados da disciplina para o relatório
+        relatorio_detalhado += (
+            f"Matéria: {materia:.<20} | Média: {media_final:>4.1f} | "
+            f"Frequência: {presenca_percentual:>5.1f}% | Situação: {situacao}\n"
+        )
+    return relatorio_detalhado
+
+
+def situacao_materia (presenca_percentual, media_final, nota_minima):
     # -------------------------------------------------------------
     # ETAPA 3: ESTRUTURA DE DECISÃO (Lógica de Aprovação/Reprovação)
     # -------------------------------------------------------------
@@ -56,31 +85,6 @@ print("-" * 50)
 relatorio_detalhado = ""
 
 # Loop para processar cada disciplina (Uso de lista para otimizar o código da Etapa 2)
-for materia in disciplinas:
-    print(f"\nDISCIPLINA: {materia}")
-    
-    # Lançamento do 1º Bimestre (Prova 6.0 + Atividades 4.0)
-    p1 = float(input(f"  Nota da Prova - 1º Bim (0-6): "))
-    a1 = float(input(f"  Nota de Atividades - 1º Bim (0-4): "))
-    nota_bim1 = p1 + a1
-    
-    # Lançamento do 2º Bimestre (Prova 6.0 + Atividades 4.0)
-    p2 = float(input(f"  Nota da Prova - 2º Bim (0-6): "))
-    a2 = float(input(f"  Nota de Atividades - 2º Bim (0-4): "))
-    nota_bim2 = p2 + a2
-    
-    # Cálculo da Média Final e Frequência
-    media_final = (nota_bim1 + nota_bim2) / 2
-    faltas = int(input(f"  Total de faltas em {materia}: "))
-    presenca_percentual = ((total_aulas - faltas) / total_aulas) * 100
+relatorio_detalhado = cadastro_notas(relatorio_detalhado, disciplinas, total_aulas, nota_minima)
 
-    situacao = situacao_materia(presenca_percentual)
-    
-    # Armazenando os dados da disciplina para o relatório
-    relatorio_detalhado += (
-        f"Matéria: {materia:.<20} | Média: {media_final:>4.1f} | "
-        f"Frequência: {presenca_percentual:>5.1f}% | Situação: {situacao}\n"
-    )
-
-relatorio = relatorio_final(nome, matricula, nivel_ensino, relatorio_detalhado)
-print(relatorio)
+relatorio_final(nome, matricula, nivel_ensino, relatorio_detalhado)
