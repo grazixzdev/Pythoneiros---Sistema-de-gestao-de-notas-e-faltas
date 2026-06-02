@@ -3,6 +3,37 @@
 # CONTEÚDO: Estruturas de Decisão (if, elif, else)
 # =================================================================
 
+def situacao_materia (presenca_percentual):
+    # -------------------------------------------------------------
+    # ETAPA 3: ESTRUTURA DE DECISÃO (Lógica de Aprovação/Reprovação)
+    # -------------------------------------------------------------
+    if presenca_percentual < 75:
+        situacao = "REPROVADO POR FALTA"
+    elif media_final >= nota_minima:
+        situacao = "APROVADO"
+    else:
+        situacao = "REPROVADO POR NOTA"
+    return(situacao)
+
+def relatorio_final (nome, matricula, nivel_ensino, relatorio_detalhado):
+    # -------------------------------------------------------------
+    # RELATÓRIO FINAL
+    # -------------------------------------------------------------
+    print("\n" + "="*70)
+    print(f"{'RELATÓRIO DE RENDIMENTO ESCOLAR':^70}")
+    print("="*70)
+    print(f"ALUNO: {nome}")
+    print(f"MATRÍCULA: {matricula}")
+    print(f"NÍVEL: {nivel_ensino}")
+    print("-" * 70)
+    print(relatorio_detalhado)
+    print("="*70)
+    print("Sistema processado de acordo com a Lei nº 9.394/1996 (LDB).")
+
+# -------------------------------------------------------------
+# INICIO DO FLUXO PRINCIPAL
+# -------------------------------------------------------------
+
 print("--- CADASTRO ACADÊMICO - EDUCAÇÃO BÁSICA ---")
 
 # 1. Cadastro de Informações Gerais
@@ -43,15 +74,7 @@ for materia in disciplinas:
     faltas = int(input(f"  Total de faltas em {materia}: "))
     presenca_percentual = ((total_aulas - faltas) / total_aulas) * 100
 
-    # -------------------------------------------------------------
-    # ETAPA 3: ESTRUTURA DE DECISÃO (Lógica de Aprovação/Reprovação)
-    # -------------------------------------------------------------
-    if presenca_percentual < 75:
-        situacao = "REPROVADO POR FALTA"
-    elif media_final >= nota_minima:
-        situacao = "APROVADO"
-    else:
-        situacao = "REPROVADO POR NOTA"
+    situacao = situacao_materia(presenca_percentual)
     
     # Armazenando os dados da disciplina para o relatório
     relatorio_detalhado += (
@@ -59,16 +82,5 @@ for materia in disciplinas:
         f"Frequência: {presenca_percentual:>5.1f}% | Situação: {situacao}\n"
     )
 
-# -------------------------------------------------------------
-# RELATÓRIO FINAL
-# -------------------------------------------------------------
-print("\n" + "="*70)
-print(f"{'RELATÓRIO DE RENDIMENTO ESCOLAR':^70}")
-print("="*70)
-print(f"ALUNO: {nome}")
-print(f"MATRÍCULA: {matricula}")
-print(f"NÍVEL: {nivel_ensino}")
-print("-" * 70)
-print(relatorio_detalhado)
-print("="*70)
-print("Sistema processado de acordo com a Lei nº 9.394/1996 (LDB).")
+relatorio = relatorio_final(nome, matricula, nivel_ensino, relatorio_detalhado)
+print(relatorio)
